@@ -1,7 +1,7 @@
-import { compose, applyMiddleware } from 'redux';
+import { compose } from 'redux';
 import { createStore, IModuleStore } from 'redux-dynamic-modules';
-import Thunk from 'redux-thunk';
-import createSaga from 'redux-saga';
+import { getThunkExtension } from 'redux-dynamic-modules-thunk';
+import { getSagaExtension } from 'redux-dynamic-modules-saga';
 
 declare global {
   interface Window {
@@ -10,15 +10,14 @@ declare global {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface State {
+export interface AppState {
 
 }
 
-const Saga = createSaga();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export const store: IModuleStore<State> = createStore({
+export const store: IModuleStore<AppState> = createStore({
   initialState: {},
-  enhancers: [applyMiddleware(Thunk, Saga)],
+  extensions: [getThunkExtension(), getSagaExtension()],
   advancedComposeEnhancers: composeEnhancers
 });
