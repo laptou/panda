@@ -1,5 +1,7 @@
-import { Store, applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import { compose, applyMiddleware } from 'redux';
+import { createStore, IModuleStore } from 'redux-dynamic-modules';
 import Thunk from 'redux-thunk';
+import createSaga from 'redux-saga';
 
 declare global {
   interface Window {
@@ -7,17 +9,16 @@ declare global {
   }
 }
 
-const reducer = combineReducers({ 
-});
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface State {
 
+}
+
+const Saga = createSaga();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export const store = createStore(
-  reducer, 
-  composeEnhancers(applyMiddleware(Thunk)));
-
-type StoreStateType<S> = S extends Store<infer State, any> ? State : never;
-type StoreActionType<S> = S extends Store<any, infer Action> ? Action : never;
-
-export type State = StoreStateType<typeof store>;
-export type Action = StoreActionType<typeof store>;
+export const store: IModuleStore<State> = createStore({
+  initialState: {},
+  enhancers: [applyMiddleware(Thunk, Saga)],
+  advancedComposeEnhancers: composeEnhancers
+});

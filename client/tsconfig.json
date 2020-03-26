@@ -30,12 +30,15 @@
       "@util/*": [
         "./src/util/*"
       ],
+      "@game/*": [
+        "./src/game/*"
+      ],
       "@style/*": [
         "./res/style/*"
       ],
       "@asset/*": [
         "./res/asset/*"
-      ],
+      ]      
     },
   },
   "include": [

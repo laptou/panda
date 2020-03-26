@@ -16,6 +16,7 @@
     "@laptou/stylelint-config": "^1.0.1",
     "@types/react": "^16.9.25",
     "@types/react-dom": "^16.9.5",
+    "@types/react-loadable": "^5.5.3",
     "@types/react-redux": "^7.1.7",
     "@types/webpack-env": "^1.15.1",
     "clean-webpack-plugin": "^3.0.0",
@@ -45,8 +46,12 @@
   "dependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-loadable": "^5.5.0",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
+    "redux-dynamic-modules": "^5.2.3",
+    "redux-dynamic-modules-thunk": "^5.2.3",
+    "redux-saga": "^1.1.3",
     "redux-thunk": "^2.3.0"
   }
 }
