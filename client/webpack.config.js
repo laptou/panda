@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 const HtmlPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin: CleanPlugin } = require('clean-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const SriPlugin = require('webpack-subresource-integrity');
@@ -20,7 +21,7 @@ const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
  *  @returns {webpack.Configuration} */
 exports.default = (env) => ({
   context: __dirname,
-  entry: ['./src/index.js'],
+  entry: ['./src/index.ts'],
   devtool: env.development ? 'eval-source-map' : false,
   devServer: {
     port: 1234,
@@ -73,11 +74,12 @@ exports.default = (env) => ({
   },
   plugins: [
     new HtmlPlugin({
-      template: 'index.html'
+      template: 'src/index.html'
     }),
-    new ForkTsCheckerWebpackPlugin({
-        workers: ForkTsCheckerWebpackPlugin.TWO_CPUS_FREE
+    new ForkTsCheckerPlugin({
+      workers: ForkTsCheckerPlugin.TWO_CPUS_FREE
     }),
+    new CleanPlugin(),
     new MiniCssExtractPlugin(),
     ...(env.production
       ? [
