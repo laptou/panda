@@ -25,7 +25,7 @@ const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
  *  @returns {webpack.Configuration} */
 exports.default = (env) => ({
   context: __dirname,
-  entry: ['./src/index.ts'],
+  entry: ['./src/index.tsx'],
   devtool: env.development ? 'eval-source-map' : false,
   devServer: {
     port: 1234,
@@ -44,13 +44,11 @@ exports.default = (env) => ({
   module: {
     rules: [
       {
-        test: /\.ts$/i,
+        test: /\.tsx?$/i,
         exclude: /node_modules/,
         use: [
           {
-            loader: 'ts-loader',
-            options: {
-            }
+            loader: 'ts-loader'
           }
         ]
       },
@@ -117,7 +115,7 @@ exports.default = (env) => ({
       : [])
   ],
   resolve: {
-    extensions: ['.js', '.ts'],
+    extensions: ['.js', '.ts', '.tsx'],
     plugins: [
       new TsConfigPathsPlugin()
     ]
