@@ -7,7 +7,11 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const SriPlugin = require('webpack-subresource-integrity');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
+const EslintPlugin = require('eslint-webpack-plugin');
+const StylelintPlugin = require('stylelint-webpack-plugin');
+
 const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 /**
@@ -34,7 +38,8 @@ exports.default = (env) => ({
     }
   },
   output: {
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    crossOriginLoading: 'anonymous'
   },
   module: {
     rules: [
@@ -46,9 +51,6 @@ exports.default = (env) => ({
             loader: 'ts-loader',
             options: {
             }
-          },
-          {
-            loader: 'eslint-loader'
           }
         ]
       },
@@ -73,6 +75,8 @@ exports.default = (env) => ({
     ]
   },
   plugins: [
+    new EslintPlugin(),
+    new StylelintPlugin(),
     new HtmlPlugin({
       template: 'src/index.html'
     }),
