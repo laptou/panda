@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "@laptou/eslint-config-react",
+    "@laptou/eslint-config-typescript"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
+}
