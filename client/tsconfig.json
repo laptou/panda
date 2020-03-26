@@ -33,7 +33,7 @@
       "@style/*": [
         "./res/style/*"
       ],
-      "@res/*": [
+      "@asset/*": [
         "./res/asset/*"
       ],
     },

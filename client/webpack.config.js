@@ -55,7 +55,7 @@ exports.default = (env) => ({
         ]
       },
       {
-        test: /\.css$/i,
+        test: /\.scss$/i,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -63,8 +63,18 @@ exports.default = (env) => ({
               esModule: true,
               hmr: env.development
             }
-          }, {
+          }, 
+          {
             loader: 'css-loader'
+          },
+          {
+            loader: 'resolve-url-loader'
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
           }
         ]
       },
